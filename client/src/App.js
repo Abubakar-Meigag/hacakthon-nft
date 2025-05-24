@@ -1,5 +1,5 @@
-import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Header from "./components/Header";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import History from "./pages/History";
@@ -10,11 +10,37 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/history" element={<History />} />
-        <Route path="/detail/:id" element={<Detail />} />
+
+        <Route
+          path="/home"
+          element={
+            <>
+              <Header />
+              <Home />
+            </>
+          }
+        />
+        <Route
+          path="/history"
+          element={
+            <>
+              <Header />
+              <History />
+            </>
+          }
+        />
+        <Route
+          path="/detail/:id"
+          element={
+            <>
+              <Header />
+              <Detail />
+            </>
+          }
+        />
       </Routes>
     </Router>
   );
 }
+
 export default App;

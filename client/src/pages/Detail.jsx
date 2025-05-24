@@ -15,12 +15,6 @@ export default function Details() {
 
   return (
     <div className="min-h-screen bg-white pb-6 flex flex-col">
-      {/* Header */}
-      <div className="flex justify-between items-center px-4 py-3 shadow-md sticky top-0 bg-white z-10">
-        <img src="/project-images/gear.png" alt="Settings" className="w-6 h-6" />
-        <h1 className="text-3xl font-bold">Verifi</h1>
-        <img src="/project-images/scan.png" alt="Scan" className="w-6 h-6" />
-      </div>
 
       {/* Back */}
       <button
