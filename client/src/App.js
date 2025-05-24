@@ -4,6 +4,7 @@ import Login from "./pages/Login";
 import Home from "./pages/Home";
 import History from "./pages/History";
 import Detail from "./pages/Detail";
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           path="/home"
           element={
             <>
+              <PrivateRoute />
               <Header />
               <Home />
             </>
@@ -24,6 +26,7 @@ function App() {
           path="/history"
           element={
             <>
+              <PrivateRoute />
               <Header />
               <History />
             </>
@@ -33,6 +36,7 @@ function App() {
           path="/detail/:id"
           element={
             <>
+              <PrivateRoute />
               <Header />
               <Detail />
             </>

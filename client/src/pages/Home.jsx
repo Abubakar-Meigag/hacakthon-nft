@@ -4,9 +4,9 @@ import { QRCodeSVG } from "qrcode.react";
 
 export default function Home() {
   const navigate = useNavigate();
-  const isVerified = true;
+  const isVerified = false; // This should be replaced with actual verification logic
 
-  const walletAddress = "0x952...4BAfe5";
+  const walletAddress = localStorage.getItem("wallet");
 
   return (
     <div className="bg-white flex flex-col justify-between pb-6">

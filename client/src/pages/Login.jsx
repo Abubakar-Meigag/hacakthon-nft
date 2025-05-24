@@ -7,32 +7,51 @@ export default function Login() {
   const [error, setError] = useState("");
 
   const handleConnect = async () => {
-    setLoading(true);
-    setError("");
+  setLoading(true);
+  setError("");
 
-    try {
-      if (!window.ethereum) {
-        throw new Error("MetaMask is not installed.");
+  try {
+    if (!window.ethereum || !window.ethereum.isMetaMask) {
+      throw new Error("MetaMask is not installed.");
+    }
+
+    // Step 1: Check if MetaMask is already connected
+    const accounts = await window.ethereum.request({
+      method: "eth_accounts",
+    });
+
+    let wallet;
+
+    if (accounts.length > 0) {
+      // Already connected
+      wallet = accounts[0];
+    } else {
+      // Check if MetaMask is already in a request state
+      const isProcessing = window.ethereum._metamask?.isUnlocked && window.ethereum._metamask.isUnlocked();
+
+      if (isProcessing) {
+        throw new Error("MetaMask is already processing a request. Please open MetaMask or refresh.");
       }
 
-      const accounts = await window.ethereum.request({
+      // Step 2: Request connection (only if safe)
+      const requested = await window.ethereum.request({
         method: "eth_requestAccounts",
       });
 
-      const wallet = accounts[0];
-
-      if (wallet) {
-        console.log("Connected wallet:", wallet);
-        // Optional: save wallet to localStorage or context here
-        navigate("/home");
-      }
-    } catch (err) {
-      console.error(err);
-      setError(err.message || "Connection failed.");
-    } finally {
-      setLoading(false);
+      wallet = requested[0];
     }
-  };
+
+    if (!wallet) throw new Error("No wallet returned");
+
+    localStorage.setItem("wallet", wallet);
+    navigate("/home");
+  } catch (err) {
+    setError(err.message || "Failed to connect wallet.");
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <div className="min-h-screen bg-white flex justify-center px-4 pt-10">
