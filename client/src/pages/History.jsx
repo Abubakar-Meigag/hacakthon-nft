@@ -2,16 +2,25 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 const mockHistory = [
-  { date: "23.05.2025", time: "18:46", wallet: "0x952...4BAfe5", target: "0x95222290D7272BaA3Ddd3890cE1Ed1650C84bAe5" },
-  { date: "21.05.2025", time: "12:24", wallet: "0xB42...2BDrf5", target: "0x21ACcb90b56B95E6A1..." },
-  // Add more dummy entries as needed
+  {
+    date: "23.05.2025",
+    time: "18:46",
+    wallet: "0x952...4BAfe5",
+    target: "0x95222290D7272BaA3Ddd3890cE1Ed1650C84bAe5"
+  },
+  {
+    date: "21.05.2025",
+    time: "12:24",
+    wallet: "0xB42...2BDrf5",
+    target: "0x21ACcb90b56B95E6A198bCe0F4Cd320Fc"
+  }
 ];
 
 export default function History() {
   const navigate = useNavigate();
 
   const goToDetails = (entry) => {
-    navigate("/details", { state: entry });
+    navigate(`/detail/${entry.wallet}`, { state: entry });
   };
 
   
